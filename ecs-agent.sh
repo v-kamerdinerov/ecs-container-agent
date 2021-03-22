@@ -1,5 +1,6 @@
 #!/bin/bash
 cluster=$1;
+
 #Install last version docker
 yum install -y yum-utils
 yum remove -y docker \
@@ -11,16 +12,18 @@ docker-latest-logrotate \
 docker-logrotate \
 docker-engine
 curl -sk https://download.docker.com/linux/centos/docker-ce.repo
-yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce docker-ce-cli containerd.io
 systemctl start docker
 systemctl enable docker
 docker version
+
 #Install ECS agent
 curl -o ecs-agent.tar https://s3.amazonaws.com/amazon-ecs-agent-us-east-1/ecs-agent-latest.tar
 docker load < ecs-agent.tar
 rm -rf ecs-agent.tar
 docker images
+
 #Configuring instance for ECS
 sh -c "echo 'net.ipv4.conf.all.route_localnet = 1' >> /etc/sysctl.conf"
 sysctl -p /etc/sysctl.conf
@@ -37,6 +40,7 @@ ECS_LOGFILE=/log/ecs-agent.log >> /etc/ecs/ecs.config
 ECS_AVAILABLE_LOGGING_DRIVERS=["json-file","awslogs"] >> /etc/ecs/ecs.config
 ECS_LOGLEVEL=info >> /etc/ecs/ecs.config
 ECS_CLUSTER=$cluster >> /etc/ecs/ecs.config
+
 #Run agent
 docker run --name ecs-agent \
 --detach=true \
