@@ -14,8 +14,8 @@ curl -sk https://download.docker.com/linux/centos/docker-ce.repo
 yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce docker-ce-cli containerd.io
 systemctl start docker
-docker version
 systemctl enable docker
+docker version
 #Install ECS agent
 curl -o ecs-agent.tar https://s3.amazonaws.com/amazon-ecs-agent-us-east-1/ecs-agent-latest.tar
 docker load < ecs-agent.tar
@@ -29,7 +29,7 @@ iptables -t nat -A OUTPUT -d 169.254.170.2 -p tcp -m tcp --dport 80 -j REDIRECT 
 iptables -A INPUT -i eth0 -p tcp --dport 51678 -j DROP
 sh -c 'iptables-save > /etc/sysconfig/iptables'
 mkdir -p /var/log/ecs /var/lib/ecs/data
-sudo mkdir -p /etc/ecs && sudo touch /etc/ecs/ecs.config
+mkdir -p /etc/ecs && touch /etc/ecs/ecs.config
 ECS_DATADIR=/data >> /etc/ecs/ecs.config
 ECS_ENABLE_TASK_IAM_ROLE=true >> /etc/ecs/ecs.config
 ECS_ENABLE_TASK_IAM_ROLE_NETWORK_HOST=true >> /etc/ecs/ecs.config
