@@ -31,7 +31,8 @@ iptables -t nat -A PREROUTING -p tcp -d 169.254.170.2 --dport 80 -j DNAT --to-de
 iptables -t nat -A OUTPUT -d 169.254.170.2 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 51679
 iptables -A INPUT -i eth0 -p tcp --dport 51678 -j DROP
 sh -c 'iptables-save > /etc/sysconfig/iptables'
-sed -i 's/.*IPTABLES_SAVE_ON_RESTART.*/IPTABLES_SAVE_ON_RESTART="yes"/' /etc/sysconfig/iptables
+sed -i 's/.*IPTABLES_SAVE_ON_RESTART.*/IPTABLES_SAVE_ON_RESTART="yes"/' /etc/sysconfig/iptables-config
+sed -i 's/.*IPTABLES_SAVE_ON_STOP.*/IPTABLES_SAVE_ON_STOP="yes"/' /etc/sysconfig/iptables-config
 service iptables restart
 mkdir -p /var/log/ecs /var/lib/ecs/data
 mkdir -p /etc/ecs && touch /etc/ecs/ecs.config
