@@ -21,16 +21,16 @@ If using **awslogs**, remember to use the following policies for your ECS contai
 
 ```json
 {
-            "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents",
-                "logs:DescribeLogStreams"
-            ],
-            "Resource": [
-                "arn:aws:logs:*:*:log-group:*"
-            ],
-            "Effect": "Allow",
-            "Sid": "AllowCWLogsForEc2Instances"
+    "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+    ],
+    "Resource": [
+        "arn:aws:logs:*:*:log-group:*"
+    ],
+    "Effect": "Allow",
+    "Sid": "AllowCWLogsForEc2Instances"
 }
 ```
