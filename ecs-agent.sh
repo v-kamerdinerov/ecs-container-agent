@@ -2,7 +2,9 @@
 cluster=$1;
 
 #Install last version docker
-yum install -y yum-utils
+yum install -y yum-utils iptables-services
+systemctl start iptables
+systemctl enable iptables
 yum remove -y docker \
 docker-client \
 docker-client-latest \
