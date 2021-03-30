@@ -12,3 +12,7 @@ Also this script install last revision of Docker for ECS agent.
 ./ecs-agent.sh my-cluster
 ```
 
+If you need change you logging driver, look at here:
+```bash
+ECS_AVAILABLE_LOGGING_DRIVERS=["json-file","awslogs"]
+```
