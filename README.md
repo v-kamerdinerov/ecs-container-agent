@@ -3,7 +3,10 @@ ECS container agent for CentOS/RHEL
 
 There is a bash script for installing ECS agent on CentOS/RHEL instances.
 
-The recommendations for installing the agent indicate that you need to use this latest Docker version, the script removes the current version and installs the latest.
+Also this scrip install last revision of Docker for ECS agent.
+
+> Refer to *https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-install.html*
+
 
 
 ```bash
